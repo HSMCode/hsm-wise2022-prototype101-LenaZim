@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class TriggerDecoy : MonoBehaviour
 {
-     public GameObject Roboter;
+    public GameObject Roboter;
+    public AudioClip decoySFX;
+    private AudioSource _audioSource;
+
+    void Start ()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
     
     private void OnTriggerEnter(Collider other)
     {
@@ -14,6 +21,10 @@ public class TriggerDecoy : MonoBehaviour
         {
             //when roboter collides with decoy
             Debug.Log("Ouch..");
+
+            _audioSource.PlayOneShot(decoySFX, 1f);
+
+            Destroy(gameObject,1f);
         }
     }
 }
