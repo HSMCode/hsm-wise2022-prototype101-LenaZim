@@ -22,9 +22,9 @@ public class TriggerDecoy : MonoBehaviour
             //when roboter collides with decoy
             Debug.Log("Ouch..");
 
-            _audioSource.PlayOneShot(decoySFX, 1f);
+            _audioSource.PlayOneShot(decoySFX, 2f);
 
-            Destroy(gameObject,1f);
+            Destroy(gameObject, 0.5f);
         }
     }
 }

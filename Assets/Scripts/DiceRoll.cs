@@ -5,21 +5,28 @@ using UnityEngine;
 public class DiceRoll : MonoBehaviour
 {
     public int diceNumber;
-    //public int luckyN1 = 1;
-    //public int luckyN3 = 3;
-    //public int luckyN6 = 6;
 
-    public int[] luckyNumbers = new int [3];
-    //public int[] luckyNumbers = {1,3,6};
-
+    //How many Elements
+    public int[] luckyNumbers = new int [8];
     public GameObject[] MyGameObjectArray;
+
+    public AudioClip diceSFX;
+    private AudioSource _audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
+        //LuckyNumbers Elements
         luckyNumbers[0] = 1;
         luckyNumbers[1] = 3;
         luckyNumbers[2] = 6;
+        luckyNumbers[3]= 14;
+        luckyNumbers[4]= 24;
+        luckyNumbers[5]= 30;
+        luckyNumbers[6]= 38;
+        luckyNumbers[7]= 42;
+
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -27,7 +34,7 @@ public class DiceRoll : MonoBehaviour
     {
         if(Input.GetKeyDown("space"))
         {
-            diceNumber = Random.Range(1, 7);
+            diceNumber = Random.Range(1, 51);
 
             Debug.Log("dice number: " + diceNumber);
 
@@ -39,6 +46,8 @@ public class DiceRoll : MonoBehaviour
                  if(diceNumber == luckyNumbers[i])
                    {
                     Debug.Log(diceNumber + " You won!");
+
+                    _audioSource.PlayOneShot(diceSFX, 1f);
                    }
 
                  else
@@ -46,15 +55,6 @@ public class DiceRoll : MonoBehaviour
                     Debug.Log("You loose.");
                  }
             }
-
-             //if(diceNumber == luckyNumbers[0] || diceNumber == luckyNumbers[1] || diceNumber == luckyNumbers[2])
-            //{
-            //Debug.Log(diceNumber + " You won!");
-            //}
-           //else
-           //{
-            //Debug.Log("You loose!");
-           //}
             
         }
     }
