@@ -9,6 +9,9 @@ public class triggerGoal : MonoBehaviour
     public AudioClip goalSFX;
     private AudioSource _audioSource;
 
+    public ParticleSystem playParticlesSystem;
+    public ParticleSystem emitParticlesSystem;
+
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -24,10 +27,39 @@ public class triggerGoal : MonoBehaviour
         {
             //when roboter collides with goal
             Debug.Log("Victory");
+            
+            //Play Particles
+            EmitParticles();
 
-            Particles.Play();
+            PlayParticles(true);
+
+
+            //Particles.Play();
 
             _audioSource.PlayOneShot(goalSFX, 1f);
         }
+
+    }
+
+
+    void EmitParticles()
+    {
+        emitParticlesSystem.Emit(50);
+    }
+     
+    void PlayParticles(bool on)
+    {
+
+        if(on)
+        {
+            playParticlesSystem.Play();
+        }
+        else if(!on)
+        {
+            playParticlesSystem.Stop();
+        }
+
+        playParticlesSystem.Play();
+        playParticlesSystem.Stop();
     }
 }

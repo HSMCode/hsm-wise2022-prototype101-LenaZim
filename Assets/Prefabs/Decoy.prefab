@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1107470859442926573}
   - component: {fileID: 7809045632130226162}
   - component: {fileID: 4378911370490538731}
-  - component: {fileID: 2300278622606680200}
   - component: {fileID: 7960722831714664581}
   m_Layer: 0
   m_Name: Decoy
@@ -112,22 +111,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Roboter: {fileID: 0}
   decoySFX: {fileID: 8300000, guid: 0c914e3857ec7a141b7315c0f424ae69, type: 3}
---- !u!54 &2300278622606680200
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2166580005577455846}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!82 &7960722831714664581
 AudioSource:
   m_ObjectHideFlags: 0
