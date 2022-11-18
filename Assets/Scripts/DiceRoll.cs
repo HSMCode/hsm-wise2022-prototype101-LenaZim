@@ -13,6 +13,8 @@ public class DiceRoll : MonoBehaviour
     public AudioClip diceSFX;
     private AudioSource _audioSource;
 
+    public bool luckyNumberWasDrawn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,15 +48,18 @@ public class DiceRoll : MonoBehaviour
                  if(diceNumber == luckyNumbers[i])
                    {
                     Debug.Log(diceNumber + " You won!");
+                    luckyNumberWasDrawn = true;
 
                     _audioSource.PlayOneShot(diceSFX, 1f);
                    }
 
-                 else
+                 else if(i == (luckyNumbers.Length-1) && luckyNumberWasDrawn == false)
                  {
                     Debug.Log("You loose.");
                  }
             }
+
+            luckyNumberWasDrawn = false;
             
         }
     }
