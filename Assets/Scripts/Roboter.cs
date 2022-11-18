@@ -19,19 +19,19 @@ public class Roboter : MonoBehaviour
         //move robot
         if(Input.GetKeyDown("w"))
         {
-            transform.Translate(0,0,step);
+            transform.Translate(0,0,step, Space.World);
         }
         if(Input.GetKeyDown("s"))
         {
-            transform.Translate(0,0,-step);
+            transform.Translate(0,0,-step, Space.World);
         }
         if(Input.GetKeyDown("d"))
         {
-            transform.Translate(step,0,0);
+            transform.Translate(step,0,0, Space.World);
         }
         if(Input.GetKeyDown("a"))
         {
-            transform.Translate(-step,0,0);
+            transform.Translate(-step,0,0, Space.World);
         }
 
         //rotate robot
