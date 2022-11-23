@@ -6,13 +6,16 @@ public class GenerateDecoy : MonoBehaviour
 {
 
     public GameObject Decoy;
-    public GameObject [] Decoys;
+    public GameObject[] Decoys;
 
+    //spawn amount
     public int spawnAmount = 5;
 
+    //randomizing spawn position
     public float spawnPositionX = 15f;
     public float spawnPositionZ = 15f;
 
+    //invoke repeating
     public float startDelay = 2f;
     public float spawnInterval = 3f;
 
@@ -22,7 +25,7 @@ public class GenerateDecoy : MonoBehaviour
         //SpawningDecoy();
 
         //InvokeRepeating("SpawningDecoy", time, repeatRate);
-        InvokeRepeating("SpawningDecoy", startDelay, spawnInterval);
+        //InvokeRepeating("SpawningDecoy", startDelay, spawnInterval);
     }
 
     // Update is called once per frame
@@ -30,9 +33,7 @@ public class GenerateDecoy : MonoBehaviour
     {
 
         if(Input.GetKeyDown("x"))
-        {
-
-            SpawningDecoy();    
+        {   
 
             //Vector3 spawnPosition = new Vector3(Random.Range(-spawnPositionX,spawnPositionX),0,Random.Range(-spawnPositionZ,spawnPositionZ));
             //Debug.Log(spawnPosition);
@@ -47,28 +48,34 @@ public class GenerateDecoy : MonoBehaviour
             //    Instantiate(Decoy, spawnPosition, transform.rotation);
             //}
 
-            //SpawningDecoyParam(spawnAmount);
+            //spawn x amount (5) decoys
+            //SpawningDecoys(); 
+
+            //spawn x decoys with "x"
+            SpawningDecoyParam(spawnAmount);
         }
 
     }
 
+    //spawn one randomly selected decoy from decoys array
     void SpawningDecoy()
     {         
             for (int i = 0; i < spawnAmount; i++)
             {
-
+                
+                //array of decoys, randomly generate the index number of the array to pick warious decoys for each spawn
                 int decoysIndex = Random.Range(0,Decoys.Length);
 
                 //generate random spawn position between the defined values
                 Vector3 spawnPosition = new Vector3(Random.Range(-spawnPositionX,spawnPositionX),0.5f,Random.Range(-spawnPositionZ,spawnPositionZ));
 
-                // intsantiate decoy
-                Instantiate(Decoys, spawnPosition, transform.rotation);
+                //intsantiate decoy
+                Instantiate(Decoys[decoysIndex], spawnPosition, Decoys[decoysIndex].transform.rotation);
             }
 
     }
 
-
+    //spawn decoy with given amount parameter
     void SpawningDecoyParam(int amount)
     {         
             for (int i = 0; i < amount; i++)
@@ -76,8 +83,8 @@ public class GenerateDecoy : MonoBehaviour
                 //generate random spawn position between the defined values
                 Vector3 spawnPosition = new Vector3(Random.Range(-spawnPositionX,spawnPositionX),0.5f,Random.Range(-spawnPositionZ,spawnPositionZ));
 
-                // intsantiate decoy / decoys[], vorher Decoy
-                Instantiate(Decoys[decoysIndex], spawnPosition, transform.rotation);
+                // intsantiate decoy
+                Instantiate(Decoy, spawnPosition, Decoy.transform.rotation);
             }
     }
 

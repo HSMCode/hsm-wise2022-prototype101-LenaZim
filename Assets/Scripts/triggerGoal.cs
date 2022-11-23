@@ -5,7 +5,8 @@ using UnityEngine;
 public class triggerGoal : MonoBehaviour
 {
     public GameObject Roboter;
-    ParticleSystem Particles;
+
+    //ParticleSystem Particles;
     public AudioClip goalSFX;
     private AudioSource _audioSource;
 
@@ -15,7 +16,7 @@ public class triggerGoal : MonoBehaviour
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        Particles = GetComponent<ParticleSystem>();
+        //Particles = GetComponent<ParticleSystem>();
     }
     
     private void OnTriggerEnter(Collider other)
@@ -23,14 +24,16 @@ public class triggerGoal : MonoBehaviour
         Debug.Log(other.name + " triggert into " + gameObject.name);
 
 
+        //when roboter collides with goal
         if(other.name == Roboter.name)
         {
-            //when roboter collides with goal
+          
             Debug.Log("Victory");
             
-            //Play Particles
+            //Using a ParticleSystem for emission
             EmitParticles();
 
+            //Using a ParticleSystem with Play and Stop
             PlayParticles(true);
 
 
@@ -41,12 +44,28 @@ public class triggerGoal : MonoBehaviour
 
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log(other.name + " triggered into " + gameObject.name);
 
+        // when roboter collides with goal
+        if(other.name == Roboter.name)
+        {
+            Debug.Log("Exit");
+            
+            // Using a ParticleSystem with Play and Stop - play false
+            PlayParticles(false);
+        }
+
+    }
+
+    //execute emitting of particles
     void EmitParticles()
     {
         emitParticlesSystem.Emit(50);
     }
      
+    //execute playing of particles
     void PlayParticles(bool on)
     {
 
@@ -59,7 +78,5 @@ public class triggerGoal : MonoBehaviour
             playParticlesSystem.Stop();
         }
 
-        playParticlesSystem.Play();
-        playParticlesSystem.Stop();
     }
 }

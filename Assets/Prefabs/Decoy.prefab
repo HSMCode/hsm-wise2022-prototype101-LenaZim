@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8656909410112040340}
   - component: {fileID: 1107470859442926573}
   - component: {fileID: 7809045632130226162}
-  - component: {fileID: 4378911370490538731}
   - component: {fileID: 7960722831714664581}
+  - component: {fileID: 7421995118677458107}
   m_Layer: 0
   m_Name: Decoy
   m_TagString: Untagged
@@ -92,25 +92,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2166580005577455846}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4378911370490538731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2166580005577455846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 885e1d29898afe2489b4a6a8d14bc535, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Roboter: {fileID: 0}
-  decoySFX: {fileID: 8300000, guid: 0c914e3857ec7a141b7315c0f424ae69, type: 3}
 --- !u!82 &7960722831714664581
 AudioSource:
   m_ObjectHideFlags: 0
@@ -207,3 +193,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7421995118677458107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2166580005577455846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885e1d29898afe2489b4a6a8d14bc535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Roboter: {fileID: 1070046448921827134, guid: 01c208faf83a1a140a1aa5d6f809e06f, type: 3}
+  decoySFX: {fileID: 8300000, guid: 0c914e3857ec7a141b7315c0f424ae69, type: 3}
