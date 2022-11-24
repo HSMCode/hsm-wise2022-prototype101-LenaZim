@@ -123,6 +123,16 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &69096882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2166580005577455846, guid: 21110575586e2cf4ca04af1ea0281ace, type: 3}
+  m_PrefabInstance: {fileID: 304152213672762805}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &312705269 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 164339919497380160, guid: ee67a4a3ece851145a848e4a5c04b570, type: 3}
+  m_PrefabInstance: {fileID: 5555845689946057379}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &555338247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -266,8 +276,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6707c4b3b6f1e540a34e29aafca6599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Decoy: {fileID: 2166580005577455846, guid: 21110575586e2cf4ca04af1ea0281ace, type: 3}
-  Decoys: []
+  Decoy: {fileID: 69096882}
+  Decoys:
+  - {fileID: 69096882}
+  - {fileID: 1073976215673637344, guid: a28e4fcdf7225124ab6eb2aadf491350, type: 3}
+  - {fileID: 1559318528565431436, guid: defe61ce2d742e443ad2359ee2f43d51, type: 3}
   spawnAmount: 5
   spawnPositionX: 15
   spawnPositionZ: 15
@@ -287,6 +300,54 @@ Transform:
   - {fileID: 1767158906}
   m_Father: {fileID: 0}
   m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &901064061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 901064063}
+  - component: {fileID: 901064062}
+  m_Layer: 0
+  m_Name: GoalGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &901064062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901064061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28ab2bf0d060b85499d8ac5e386abd94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Goal: {fileID: 312705269}
+  minspawnPositionX: 5
+  minspawnPositionZ: 5
+  maxspawnPositionX: 15
+  maxspawnPositionZ: 15
+--- !u!4 &901064063
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901064061}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1031245747 stripped
 GameObject:

@@ -15,6 +15,8 @@ public class DiceRoll : MonoBehaviour
 
     public bool luckyNumberWasDrawn;
 
+    public ParticleSystem emitParticlesSystem;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,21 +48,29 @@ public class DiceRoll : MonoBehaviour
                 Debug.Log("for loop i " + i);
 
                  if(diceNumber == luckyNumbers[i])
-                   {
+                 {
                     Debug.Log(diceNumber + " You won!");
                     luckyNumberWasDrawn = true;
 
                     _audioSource.PlayOneShot(diceSFX, 1f);
-                   }
+
+                    EmitParticles();
+                 }
 
                  else if(i == (luckyNumbers.Length-1) && luckyNumberWasDrawn == false)
                  {
-                    Debug.Log("You loose.");
+                     Debug.Log("You loose.");
                  }
             }
 
             luckyNumberWasDrawn = false;
             
         }
+    }
+
+    //execute emitting of particles
+    void EmitParticles()
+    {
+        emitParticlesSystem.Emit(50);
     }
 }
