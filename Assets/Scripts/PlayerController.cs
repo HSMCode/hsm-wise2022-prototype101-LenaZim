@@ -7,12 +7,15 @@ public class PlayerController : MonoBehaviour
 
     public float horizontalInput;
     public float forwardInput;
-    public float speed;
-    public float turnSpeed;
+    [SerializeField] public float speed;
+    [SerializeField] public float turnSpeed;
+
     public Vector3 force;
 
     private Animator _playerAnim;
     private Rigidbody _playerRb;
+
+    public bool isOnGround;
 
     // Start is called before the first frame update
     void Start()
@@ -36,17 +39,28 @@ public class PlayerController : MonoBehaviour
 
         if(forwardInput != 0 || horizontalInput != 0)
         {
-        _playerAnim.SetBool("Walk", true);
+            _playerAnim.SetBool("Walk", true);
         }
         else
         {
-        _playerAnim.SetBool("Walk", false);
+            _playerAnim.SetBool("Walk", false);
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
             _playerRb.AddForce(force, ForceMode.Impulse);
             _playerAnim.SetTrigger("Jump");
+
+            isOnGround = false;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Ground"))
+        {
+            isOnGround = true;
+        }
+    }
+
 }
