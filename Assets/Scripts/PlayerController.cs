@@ -13,14 +13,26 @@ public class PlayerController : MonoBehaviour
     public Vector3 force;
 
     private Animator _playerAnim;
+
     private Rigidbody _playerRb;
+    public float force;
+    public float forceDown;
+    public float gravityModifier = 1f;
 
     public bool isOnGround;
+    public bool isJumping;
+    public bool isFalling;
+    public bool isLanding;
+
+    public bool jumpCancelled;
+    public float jumpTimer;
+    public float jumpButtonPressedTime = 1f;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        //Variable wird gefüllt mit Komponente, Referenz wird gesetzt
+        //Variable wird gefuellt mit Komponente, Referenz wird gesetzt
         _playerAnim = GetComponent<Animator>();
         _playerRb = GetComponent<Rigidbody>();
     }
@@ -46,13 +58,68 @@ public class PlayerController : MonoBehaviour
             _playerAnim.SetBool("Walk", false);
         }
 
-        if(Input.GetKeyDown(KeyCode.Space) && isOnGround)
+        if(Input.GetKeyDown(KeyCode.Space) && isOnGround && !isFalling)
         {
-            _playerRb.AddForce(force, ForceMode.Impulse);
-            _playerAnim.SetTrigger("Jump");
 
             isOnGround = false;
+            isJumping = true;
+
+            //_playerRb.AddForce(force, ForceMode.Impulse);
+            if(isJumping)
+            {
+                _playerAnim.SetTrigger("Jump");
+            }
+
         }
+
+        if(Input.GetKeyUp(KeyCode.Space))
+        {
+            isJumping = false;
+            isFalling = true;
+
+            if(isFalling)
+            {
+                _playerAnim.SetBool("Fall", true);
+            }
+        }
+
+        if(isJumping)
+        {
+            jumpTimer += Time.deltaTimer;
+            if(Input.GetKeyUp(KeyCode.Space))
+            {
+                jumpCancelled = true;
+            }
+            if(jumpTimer > jumpButtonPressedTime)
+            {
+                isJumping = false;
+                jumpCancelled = true;
+            }
+        }
+
+        if(_playerRb.velocity.y < 0 && isFalling)
+        {
+            isFalling = false;
+            isLanding = true;
+            _playerAnim.SetBool("Fall",false);
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if(isJumping && !jumpCancelled)
+        {
+            gravityModifier = 1f;
+            _playerRb.AddForce(Vector3.up * force, ForceMode.Force);
+        }
+
+        if(isFalling || isOnGround || isLanding || jumpCancelled)
+        {
+           // _playerRb.AddForce(Vector3.down * forceDown * _playerRb.mass);
+           gravityModifier = 25f;
+        }
+
+        _playerRb.AddForce(Physics.gravity * (gravityModifier - 1) * _playerRb.mass);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -60,6 +127,14 @@ public class PlayerController : MonoBehaviour
         if(collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
+
+            //isLanding = false;
+
+            if(isFalling)
+            {
+                _playerAnim.SetBool("Fall", false);
+                isFalling = false;
+            }
         }
     }
 
