@@ -10,13 +10,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float speed;
     [SerializeField] public float turnSpeed;
 
-    public Vector3 force;
-
     private Animator _playerAnim;
 
     private Rigidbody _playerRb;
     public float force;
-    public float forceDown;
+    //public float forceDown;
     public float gravityModifier = 1f;
 
     public bool isOnGround;
@@ -72,23 +70,18 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        if(Input.GetKeyUp(KeyCode.Space))
-        {
-            isJumping = false;
-            isFalling = true;
-
-            if(isFalling)
-            {
-                _playerAnim.SetBool("Fall", true);
-            }
-        }
-
         if(isJumping)
         {
-            jumpTimer += Time.deltaTimer;
+            jumpTimer += Time.deltaTime;
             if(Input.GetKeyUp(KeyCode.Space))
             {
-                jumpCancelled = true;
+                isJumping = false;
+                isFalling = true;
+
+                if(isFalling)
+                {
+                    _playerAnim.SetBool("Fall", true);
+                }
             }
             if(jumpTimer > jumpButtonPressedTime)
             {
@@ -101,13 +94,13 @@ public class PlayerController : MonoBehaviour
         {
             isFalling = false;
             isLanding = true;
-            _playerAnim.SetBool("Fall",false);
+            _playerAnim.SetBool("Fall", false);
         }
     }
 
     void FixedUpdate()
     {
-        if(isJumping && !jumpCancelled)
+        if(isJumping)
         {
             gravityModifier = 1f;
             _playerRb.AddForce(Vector3.up * force, ForceMode.Force);
@@ -116,26 +109,35 @@ public class PlayerController : MonoBehaviour
         if(isFalling || isOnGround || isLanding || jumpCancelled)
         {
            // _playerRb.AddForce(Vector3.down * forceDown * _playerRb.mass);
-           gravityModifier = 25f;
+           gravityModifier = 30f;
         }
 
         _playerRb.AddForce(Physics.gravity * (gravityModifier - 1) * _playerRb.mass);
     }
+
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if(other.gameObject.CompareTag("Ground"))
+    //     {
+    //         isOnGround = true;
+    //     }
+    // }
+
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
-
+            jumpTimer = 0;
+            jumpCancelled = false;
             //isLanding = false;
 
-            if(isFalling)
+            if(isLanding)
             {
-                _playerAnim.SetBool("Fall", false);
-                isFalling = false;
+                _playerAnim.SetBool("Land", false);
+                isLanding = false;
             }
         }
     }
-
 }
