@@ -9,6 +9,8 @@ public class MoveEnemy : MonoBehaviour
     Vector3 destination;
     NavMeshAgent enemy;
 
+    public GameObject characterMedium;
+
     void Start()
     {
         // Cache enemy component and destination
@@ -23,6 +25,18 @@ public class MoveEnemy : MonoBehaviour
         {
             destination = target.position;
             enemy.destination = destination;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.name + " triggert into " + gameObject.name);
+
+        if(other.name == characterMedium.name)
+        {
+            //when character collides with enemy
+            Debug.Log("Ouch..");
+
+            Destroy(gameObject, 0.5f);
         }
     }
 }

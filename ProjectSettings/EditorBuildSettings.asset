@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Start.unity
+    path: Assets/Scenes/Start/Start.unity
     guid: d4a5bc02d6b063843babceeed3ff9e94
   - enabled: 1
-    path: Assets/Scenes/Character.unity
+    path: Assets/Scenes/Character/Character.unity
     guid: b568f37372e66894db80f99ac45e1768
   - enabled: 1
     path: Assets/Scenes/Prototype101_dice.unity
     guid: d24f0ca3cef2484439319eacdf605bd1
   - enabled: 1
-    path: Assets/Scenes/Prototype101_Decoy.unity
+    path: Assets/Scenes/Prototype101_Decoy/Prototype101_Decoy.unity
     guid: e60e5addea22ecb478c371c46a15ca66
   m_configObjects: {}

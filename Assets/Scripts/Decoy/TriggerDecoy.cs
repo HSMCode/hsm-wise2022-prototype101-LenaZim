@@ -5,6 +5,7 @@ using UnityEngine;
 public class TriggerDecoy : MonoBehaviour
 {
     public GameObject Roboter;
+
     public AudioClip decoySFX;
     private AudioSource _audioSource;
 

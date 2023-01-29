@@ -6,7 +6,6 @@ public class triggerGoal : MonoBehaviour
 {
     public GameObject Roboter;
 
-    //ParticleSystem Particles;
     public AudioClip goalSFX;
     private AudioSource _audioSource;
 
@@ -16,7 +15,6 @@ public class triggerGoal : MonoBehaviour
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        //Particles = GetComponent<ParticleSystem>();
     }
     
     private void OnTriggerEnter(Collider other)
@@ -35,9 +33,6 @@ public class triggerGoal : MonoBehaviour
 
             //Using a ParticleSystem with Play and Stop
             PlayParticles(true);
-
-
-            //Particles.Play();
 
             _audioSource.PlayOneShot(goalSFX, 1f);
         }

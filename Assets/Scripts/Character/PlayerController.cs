@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     //public float forceDown;
     public float gravityModifier = 1f;
 
+    //Checks
     public bool isOnGround;
     public bool isJumping;
     public bool isFalling;
@@ -62,7 +63,6 @@ public class PlayerController : MonoBehaviour
             isOnGround = false;
             isJumping = true;
 
-            //_playerRb.AddForce(force, ForceMode.Impulse);
             if(isJumping)
             {
                 _playerAnim.SetTrigger("Jump");
@@ -108,20 +108,11 @@ public class PlayerController : MonoBehaviour
 
         if(isFalling || isOnGround || isLanding || jumpCancelled)
         {
-           // _playerRb.AddForce(Vector3.down * forceDown * _playerRb.mass);
            gravityModifier = 30f;
         }
 
         _playerRb.AddForce(Physics.gravity * (gravityModifier - 1) * _playerRb.mass);
     }
-
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if(other.gameObject.CompareTag("Ground"))
-    //     {
-    //         isOnGround = true;
-    //     }
-    // }
 
 
     private void OnCollisionEnter(Collision collision)
@@ -131,7 +122,6 @@ public class PlayerController : MonoBehaviour
             isOnGround = true;
             jumpTimer = 0;
             jumpCancelled = false;
-            //isLanding = false;
 
             if(isLanding)
             {

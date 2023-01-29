@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UpdateScoreTimer : MonoBehaviour
 {
-
+    // variable for GameUIs
     private GameObject _gameUI;
     private GameObject _gameOverUI;
 
@@ -19,22 +20,26 @@ public class UpdateScoreTimer : MonoBehaviour
     // variables for timer
     private Text timerUI;
     public string timerText = "Countdown: ";
-    private float countRemaining = 10f;
+    public float countRemaining = 10f;
     private bool countingDown = true;
 
-    //variables for result ui
+    // variables for result ui
     private Text resultUI;
     public string resultLost = "You lost!";
     public string resultWin = "You won!";
 
-    //variables for game over
-    private bool gameOver;
+    // variables for game over
+    public bool gameOver;
     private bool gameWon;
     private bool gameLost;
 
-    // Start is called before the first frame update
+    //variables for enemies
+    public int destroyedEnemies;
+
+
     void Start()
     {
+
         _gameUI = GameObject.Find("Game");
         _gameOverUI = GameObject.Find("GameOver");
 
@@ -44,18 +49,25 @@ public class UpdateScoreTimer : MonoBehaviour
 
         _gameUI.SetActive(true);
         _gameOverUI.SetActive(false);
-
     }
 
-    // Update is called once per frame
     void Update()
     {
+        CountdownTimer();
+
         if(Input.GetKeyDown(KeyCode.Space))
         {
             currentScore += addScore;
-            scoreUI.text = scoreText + currentScore.ToString();
+            scoreUI.text = scoreText + currentScore.ToString();            
         }
+
+        if(Input.GetKeyDown(KeyCode.R) && gameOver)
+        {
+            SceneManager.LoadScene(0);
+        }
+
     }
+
 
     private void CountdownTimer()
     {
@@ -66,7 +78,7 @@ public class UpdateScoreTimer : MonoBehaviour
                 countRemaining -= Time.deltaTime;
                 timerUI.text = timerText + Mathf.Round(countRemaining).ToString();
             }
-            else
+            else 
             {
                 countRemaining = 0;
                 timerUI.text = timerText + countRemaining.ToString();
@@ -77,34 +89,49 @@ public class UpdateScoreTimer : MonoBehaviour
         }
     }
 
+
+
     private void CheckGameOver()
     {
-        //GameOver WIN
+        // GameOver WIN
         if(currentScore >= winScore)
         {
             gameWon = true;
+            gameOver = true;
 
-            resultUI.text = resultWin;
-            resultUI.color = Color.green;
+            StartCoroutine(GameOver());
+
         }
-        //GameOver LOST
-        else if (currentScore < winScore && !countingDown)
+        // GameOver LOST
+        else if(currentScore < winScore && !countingDown)
         {
             gameLost = true;
+            gameOver = true;
 
-            resultUI.text = resultLost;
-            resultUI.color = Color.red;
+            StartCoroutine(GameOver());
+
         }
 
-        if(gameOver)
+        IEnumerator GameOver()
         {
+            yield return new WaitForSeconds(2f);
+
+            if (gameWon)
+            {
+                resultUI.text = resultWin;
+                resultUI.color = Color.green;
+            }
+            else if (gameLost)
+            {
+                resultUI.text = resultLost;
+                resultUI.color = Color.red;
+            }
+
             _gameUI.SetActive(false);
             _gameOverUI.SetActive(true);
 
-            //HA mit Taste scene neu laden
-            //enemy gucken ob richtig, mit gegnern collidieren ein destroy auf gegner+ variable hochzaehlen punktestand
-            //scoretimerscript auf character drauf ziehen...
         }
+
     }
 
 

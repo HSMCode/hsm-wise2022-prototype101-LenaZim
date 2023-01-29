@@ -10,7 +10,7 @@ public class CameraFollow : MonoBehaviour
 
     void Start ()
     {
-        //target = player.transform;
+     
     }
     
     void LateUpdate()
